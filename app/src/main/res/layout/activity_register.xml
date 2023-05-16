@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/Account"
+            android:layout_width="208dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="103dp"
+            android:drawableStart="@drawable/person"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="員工編號"
+            android:inputType="text"
+            android:textColorHint="#545454"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_textView" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="207dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="103dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/lock"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="密碼"
+            android:inputType="textPassword"
+            android:textColorHint="#545454"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Account" />
+
+        <TextView
+            android:id="@+id/result_textView"
+            android:layout_width="86dp"
+            android:layout_height="38dp"
+
+            android:layout_below="@+id/Regis_Sure"
+            android:layout_alignStart="@+id/Regis_Sure"
+            android:layout_alignEnd="@+id/Regis_Sure"
+            android:layout_marginStart="164dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="164dp"
+            android:textColor="#FFF3DC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/Regis_Sure"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="51dp"
+            android:layout_marginEnd="107dp"
+            android:background="@drawable/capsule"
+            android:backgroundTint="#FFED99"
+            android:text="確定"
+
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

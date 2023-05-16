@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InventoryActivity">
+
+    <TextView
+        android:id="@+id/inventorytextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="180dp"
+        android:text="這是盤點頁面"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/inventorywaytextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="262dp"
+        android:text="選擇盤點方式"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/inventory_way"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="47dp"
+        android:ems="10"
+        android:entries="@array/spinnerway"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventorywaytextView" />
+
+    <TextView
+        android:id="@+id/inventoryplacetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="262dp"
+        android:text="選擇盤點地點"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_way" />
+
+    <Spinner
+        android:id="@+id/inventory_place"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="46dp"
+        android:ems="10"
+        android:entries="@array/spinnerunit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventoryplacetextView" />
+
+    <TextView
+        android:id="@+id/inventorydatetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="262dp"
+        android:text="輸入盤點日期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_place" />
+
+    <EditText
+        android:id="@+id/inventory_year"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="年"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventorydatetextView" />
+
+    <EditText
+        android:id="@+id/inventory_month"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="月"
+        app:layout_constraintEnd_toStartOf="@+id/inventory_day"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/inventory_year"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_place" />
+
+    <EditText
+        android:id="@+id/inventory_day"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:hint="日"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_place" />
+
+    <TextView
+        android:id="@+id/inventornametextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="235dp"
+        android:text="輸入盤點人員姓名"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_minute" />
+
+    <EditText
+        android:id="@+id/inventory_name"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:hint="姓名"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventornametextView" />
+
+    <TextView
+        android:id="@+id/inventorytimetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="263dp"
+        android:text="輸入盤點時間"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_year" />
+
+    <EditText
+        android:id="@+id/inventory_hour"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        android:ems="10"
+        android:hint="時"
+        app:layout_constraintEnd_toStartOf="@+id/inventory_minute"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventorytimetextView" />
+
+    <EditText
+        android:id="@+id/inventory_minute"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="分"
+        app:layout_constraintStart_toEndOf="@+id/inventory_hour"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_month" />
+
+    <Spinner
+        android:id="@+id/inventory_ampm"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="47dp"
+        android:ems="10"
+        android:entries="@array/spinnerampm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inventory_minute"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_day" />
+
+    <Button
+        android:id="@+id/inventoryokbutton"
+        android:layout_width="123dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="154dp"
+        android:background="@drawable/capsule"
+        android:backgroundTint="#FFb733"
+        android:text="確定"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

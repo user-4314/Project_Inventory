@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerunit">
+        <item>手術室</item>
+        <item>呼吸治療室</item>
+        <item>靜脈注射小組 IV-TEAM</item>
+        <item>嬰兒室</item>
+        <item>6B 病房</item>
+        <item>8A 病房</item>
+        <item>3A 病房</item>
+        <item>10A同新病房</item>
+        <item>10B 病房</item>
+        <item>5A 病房</item>
+        <item>正子斷層造影檢查中心</item>
+        <item>6A 病房</item>
+        <item> 7B 病房</item>
+        <item>5B 病房</item>
+        <item>新寧病房</item>
+        <item>9B 病房</item>
+        <item>聖賢大樓腹膜透析室</item>
+        <item>聖賢大樓 5 樓血液透析室</item>
+        <item>聖賢大樓 6 樓血液透析室</item>
+        <item>聖賢大樓 3 樓血液透析室</item>
+        <item>亞急性呼吸照護病房RCC</item>
+        <item>9A 病房</item>
+        <item>7A 病房</item>
+        <item>產房</item>
+        <item>第一洗腎室</item>
+        <item>門診</item>
+        <item>燒傷加護病房（BICU)</item>
+        <item>外科加護病房SICU</item>
+        <item>腦神經加護病房 NRICU</item>
+        <item>10E病房</item>
+        <item>健康檢查中心</item>
+        <item>急診室ER</item>
+        <item>小兒加護病房PICU</item>
+        <item>同新門診</item>
+        <item>內科加護病房MICU</item>
+        <item>日間照護</item>
+        <item>健康檢查中心醫技組</item>
+        <item>癌症防治中心</item>
+        <item>麻醉科</item>
+        <item>聖賢眼科</item>
+        <item>放射診斷科</item>
+        <item>胸腔內科</item>
+        <item>血腫科化療室</item>
+        <item>睡眠檢查中心</item>
+        <item>神經科</item>
+        <item>醫學美容中心</item>
+        <item>內視鏡組</item>
+        <item>復健科</item>
+        <item>聖賢復健科</item>
+        <item>周邊血管中心</item>
+        <item>第二心導管室</item>
+        <item>腎臟科</item>
+        <item>急診醫學科</item>
+        <item>心功能組</item>
+        <item>小兒科</item>
+        <item>神經生理組</item>
+        <item>心臟內科</item>
+        <item>心臟外科</item>
+        <item>再生醫學中心</item>
+        <item>工務課</item>
+        <item>社區護理</item>
+        <item>醫工課</item>
+        <item>心導管室</item>
+        <item>血液組</item>
+        <item>血液腫瘤科</item>
+        <item>血庫組</item>
+        <item>教育研究委員會</item>
+        <item>中醫科</item>
+        <item>核子醫學科</item>
+        <item>聖賢門診</item>
+        <item>中醫藥局</item>
+        <item>微生物組</item>
+        <item>聖賢牙科</item>
+        <item>病理檢驗科</item>
+        <item>牙科部</item>
+        <item>生化血清組</item>
+        <item>轉譯醫學中心</item>
+        <item>分子醫學組</item>
+        <item>迴旋加速器中心</item>
+        <item>超音波組</item>
+        <item>物理治療組</item>
+        <item>鏡檢組</item>
+        <item>肺復原中心</item>
+        <item>職能治療組</item>
+    </string-array>
+</resources>

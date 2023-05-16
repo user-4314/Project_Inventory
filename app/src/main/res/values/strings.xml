@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">歡迎來到BookKing訂房王</string>
+    <string name="bmi_hello">查詢結果</string>
+    <string name="dayf_result">你訂購的天數是</string>
+    <string name="dayb_result">天</string>
+    <string name="location_result">\n你選擇的縣市是:</string>
+    <string name="roomf_result">\n你選擇的房型是</string>
+    <string name="roomb_result">人房</string>
+    <string name="judgef_result">\n你可接受的最低評價是</string>
+    <string name="judgeb_result">星\n</string>
+    <string name="hotel_result">以下是符合您需求的飯店:</string>
+    <string name="advice_low">預算不足</string>
+    <string name="advice_high">預算充足</string>
+    <string name="action_settings">設定</string>
+    <string name="report_back">回上頁更改條件</string>
+    <string name="advice_history">上次訂單價錢：</string>
+    <string name="input_empty"></string>
+
+</resources>
