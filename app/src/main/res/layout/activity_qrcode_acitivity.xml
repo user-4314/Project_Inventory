@@ -11,34 +11,134 @@
         android:layout_width="145dp"
         android:layout_height="25dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="130dp"
         android:text="qrcode畫面"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/QRcodecontext"
-        android:layout_width="355dp"
-        android:layout_height="184dp"
+        android:layout_width="418dp"
+        android:layout_height="88dp"
         android:layout_marginStart="134dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="135dp"
-        android:text="TextView"
+        android:ems="10"
+        android:gravity="center"
+        android:text="資產代號:暫無資料\n資產名稱:暫無資料\n使用單位:暫無資料"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camerascene" />
 
     <SurfaceView
         android:id="@+id/camerascene"
-        android:layout_width="285dp"
-        android:layout_height="295dp"
+        android:layout_width="326dp"
+        android:layout_height="301dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="63dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qrcodetextView" />
+
+    <TextView
+        android:id="@+id/appearancetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="外觀清潔"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QRcodecontext" />
+
+    <TextView
+        android:id="@+id/maintaintextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="8dp"
+        android:text="保養狀態"
+        app:layout_constraintStart_toEndOf="@+id/appearancetextView"
+        app:layout_constraintTop_toBottomOf="@+id/QRcodecontext" />
+
+    <TextView
+        android:id="@+id/functiontextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="53dp"
+        android:text="開關機關能"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/maintaintextView"
+        app:layout_constraintTop_toBottomOf="@+id/QRcodecontext" />
+
+    <Spinner
+        android:id="@+id/appearance"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:entries="@array/normalunnormal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appearancetextView" />
+
+    <Spinner
+        android:id="@+id/function"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="13dp"
+        android:ems="10"
+        android:entries="@array/normalunnormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/maintain"
+        app:layout_constraintTop_toBottomOf="@+id/functiontextView" />
+
+    <Spinner
+        android:id="@+id/maintain"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:entries="@array/finishunfinish"
+        app:layout_constraintStart_toEndOf="@+id/appearance"
+        app:layout_constraintTop_toBottomOf="@+id/maintaintextView" />
+
+    <Button
+        android:id="@+id/qrcodesure"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/capsule"
+        android:backgroundTint="#FFED99"
+        android:text="確認"
+        app:layout_constraintEnd_toStartOf="@+id/qrcodefinish"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maintain" />
+
+    <Button
+        android:id="@+id/qrcodefinish"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="62dp"
+        android:background="@drawable/capsule"
+        android:backgroundTint="#FFED99"
+        android:text="完成"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/qrcodesure"
+        app:layout_constraintTop_toBottomOf="@+id/function" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
