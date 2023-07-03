@@ -15,5 +15,9 @@
     <string name="report_back">回上頁更改條件</string>
     <string name="advice_history">上次訂單價錢：</string>
     <string name="input_empty"></string>
-
+    <string name="or_register_with">Or register with</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="tagLine">A medical equipment inventory management app tracks, organizes, and optimizes the availability and usage of healthcare facility equipment.</string>
+    <string name="medical_equipment_inventory_management">Medical\nEquipment\nInventory\nManagement</string>
 </resources>
