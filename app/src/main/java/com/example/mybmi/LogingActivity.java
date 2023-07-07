@@ -40,9 +40,49 @@ public class LogingActivity extends Activity {
         Login_Sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(LogingActivity.this,InitialActivity .class);
-                startActivity(intent);
+                Accountstr = Login_Account.getText().toString();
+                Passwordstr = Login_Password.getText().toString();
+                String url = "http://140.136.151.67/YuLogging.php";
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        result = response.trim();
+                        Login_result.setText(result);
+                        if (result.equals("No")) {
+                            Toast.makeText(LogingActivity.this, "帳號或密碼錯誤", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Intent intent = new Intent();
+                            intent.setClass(LogingActivity.this, InitialActivity.class);
+                            Toast.makeText(LogingActivity.this, "登入成功", Toast.LENGTH_LONG).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("KEY_userinfo", Accountstr);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LogingActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Login_result.setText(error.toString());
+                    }
+                }) {
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("LoginName", Accountstr);//和php的參數做連結
+                        params.put("LoginPassword", Passwordstr);
+                        return params;
+
+                    }
+
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(LogingActivity.this);
+                requestQueue.add(stringRequest);
 
             }
 
