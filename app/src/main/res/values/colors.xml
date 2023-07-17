@@ -11,4 +11,10 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPrimary">#02DDC9</color>
     <color name="colorPrimaryDark">#FF000000</color>
+    <color name="colorAccent">#E91E63</color>
+
+    <color name="colorBackground">#1A1A1A</color>
+    <color name="colorHint">#BFBFBF</color>
+    <color name="colorButton">#FFCC33</color>
+    <color name="colorLoginBackground">#333333</color>
 </resources>
