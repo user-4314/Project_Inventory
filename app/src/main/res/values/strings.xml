@@ -20,4 +20,6 @@
     <string name="login">Login</string>
     <string name="tagLine">A medical equipment inventory management app tracks, organizes, and optimizes the availability and usage of healthcare facility equipment.</string>
     <string name="medical_equipment_inventory_management">Medical\nEquipment\nInventory\nManagement</string>
+    <string name="employeeid">Employee ID</string>
+    <string name="password">Password</string>
 </resources>
