@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,7 +24,7 @@ public class LogingActivity extends Activity {
     EditText Login_Account;
     EditText Login_Password;
     TextView Login_result;
-    Button Login_Sure;
+    ImageButton Login_Sure;
     String result;
     String Passwordstr;
     String Accountstr;
@@ -35,7 +36,7 @@ public class LogingActivity extends Activity {
         Login_Account = (EditText) findViewById(R.id.Login_Account);//可以測試一下R.id.Account
         Login_Password = (EditText) findViewById(R.id.Login_Password);
         Login_result = (TextView) findViewById(R.id.Login_result);
-        Login_Sure = (Button) findViewById(R.id.Login_Sure);
+        Login_Sure = (ImageButton) findViewById(R.id.Login_Sure);
 
         Login_Sure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +48,7 @@ public class LogingActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         result = response.trim();
-                        Login_result.setText(result);
+                        //Login_result.setText(result);
                         if (result.equals("No")) {
                             Toast.makeText(LogingActivity.this, "帳號或密碼錯誤", Toast.LENGTH_LONG).show();
                         }
@@ -68,7 +69,6 @@ public class LogingActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(LogingActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        Login_result.setText(error.toString());
                     }
                 }) {
                     protected Map<String, String> getParams() {
