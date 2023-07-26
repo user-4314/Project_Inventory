@@ -11,10 +11,123 @@
         android:layout_width="67dp"
         android:layout_height="19dp"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="183dp"
         android:text="nfc畫面"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/NFCcontext"
+        android:layout_width="418dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="135dp"
+        android:ems="10"
+        android:gravity="center"
+        android:text="資產代號:暫無資料\n資產名稱:暫無資料\n使用單位:暫無資料"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rfidtextView" />
+
+    <TextView
+        android:id="@+id/nfcappearancetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="外觀清潔"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NFCcontext" />
+
+    <TextView
+        android:id="@+id/nfcmaintaintextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:text="保養狀態"
+        app:layout_constraintStart_toEndOf="@+id/nfcappearancetextView"
+        app:layout_constraintTop_toBottomOf="@+id/NFCcontext" />
+
+    <TextView
+        android:id="@+id/nfcfunctiontextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="53dp"
+        android:text="開關機關能"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nfcmaintaintextView"
+        app:layout_constraintTop_toBottomOf="@+id/NFCcontext" />
+
+    <Spinner
+        android:id="@+id/nfcappearance"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:entries="@array/normalunnormal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nfcappearancetextView" />
+
+    <Spinner
+        android:id="@+id/nfcfunction"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="13dp"
+        android:ems="10"
+        android:entries="@array/normalunnormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nfcmaintain"
+        app:layout_constraintTop_toBottomOf="@+id/nfcfunctiontextView" />
+
+    <Spinner
+        android:id="@+id/nfcmaintain"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:entries="@array/finishunfinish"
+        app:layout_constraintStart_toEndOf="@+id/nfcappearance"
+        app:layout_constraintTop_toBottomOf="@+id/nfcmaintaintextView" />
+
+    <Button
+        android:id="@+id/nfcsure"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/capsule"
+        android:backgroundTint="#FFED99"
+        android:text="確認"
+        app:layout_constraintEnd_toStartOf="@+id/nfcfinish"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nfcmaintain" />
+
+    <Button
+        android:id="@+id/nfcfinish"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="62dp"
+        android:background="@drawable/capsule"
+        android:backgroundTint="#FFED99"
+        android:text="完成"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nfcsure"
+        app:layout_constraintTop_toBottomOf="@+id/nfcfunction" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
