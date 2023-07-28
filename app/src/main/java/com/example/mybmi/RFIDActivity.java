@@ -24,15 +24,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RFIDActivity extends Activity {
     String name,ampm,place,nfcitemnumber,nfcitemname,nfcplace,appearance,maintain,function;;
     double year ,month,day,hour,minute;
     String Accountstr;
+    String result;
     NfcAdapter nfcAdapter;
     Tag myTag;
     PendingIntent pendingIntent;
@@ -180,12 +190,52 @@ public class RFIDActivity extends Activity {
                 appearance = str_appearance.getSelectedItem().toString();
                 maintain = str_maintain.getSelectedItem().toString();
                 function = str_function.getSelectedItem().toString();
-                Toast.makeText(RFIDActivity.this, "盤點成功", Toast.LENGTH_SHORT).show();
                 //加php
+                String url = "http://140.136.151.67/hsQRcodeScanData.php";
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        result = response.trim();
+                        if (result.equals("success")) {
+                            Toast.makeText(RFIDActivity.this, "掃描成功", Toast.LENGTH_LONG).show();
 
+                        } else {
+                            Toast.makeText(RFIDActivity.this, "此物品已掃描過", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RFIDActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    protected Map getParams() {
+                        Map params = new HashMap();
+                        params.put("name", name);//和php的參數做連結
+                        params.put("ampm", ampm);
+                        params.put("itemnumber",nfcitemnumber);
+                        params.put("itemname",nfcitemname);
+                        params.put("apperance",appearance);
+                        params.put("maintain",maintain);
+                        params.put("place",place);
+                        params.put("function",function);
+                        params.put("year",String.valueOf(year));
+                        params.put("month",String.valueOf(month));
+                        params.put("day",String.valueOf(day));
+                        params.put("hour",String.valueOf(hour));
+                        params.put("minute",String.valueOf(minute));
+                        return params;
 
+                    }
+
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(RFIDActivity.this);
+                requestQueue.add(stringRequest);
+
+                //Toast.makeText(QRcodeMainActivity.this, "盤點成功", Toast.LENGTH_SHORT).show();
 
             }
+
             else {
                 Toast.makeText(RFIDActivity.this, "此資產不屬於此使用單位", Toast.LENGTH_LONG).show();
             }
