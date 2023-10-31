@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="usuallyuse">
+        <item>光源機</item>
+        <item>站立式無影燈</item>
+        <item>超音波</item>
+        <item>侵入式血壓模組</item>
+        <item>靜脈定位器</item>
+        <item>輪椅</item>
+    </string-array>
+</resources>
+
+
+
+
+
