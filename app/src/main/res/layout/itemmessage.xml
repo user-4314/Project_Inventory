@@ -8,27 +8,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:background="#fff3dc">
 
         <RelativeLayout
-            android:layout_width="394dp"
-            android:layout_height="90dp"
+            android:layout_width="398dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="128dp">
+                android:layout_height="190dp">
 
                 <TextView
                     android:id="@+id/item__name"
                     android:layout_width="386dp"
-                    android:layout_height="43dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="10dp"
                     android:text="資產名稱:"
                     android:textColor="@color/black"
@@ -40,7 +40,7 @@
                 <TextView
                     android:id="@+id/item__code"
                     android:layout_width="384dp"
-                    android:layout_height="21dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="8dp"
                     android:text="資產代號:"
                     android:textColor="#545454"
@@ -49,6 +49,56 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/item__name" />
 
+                <TextView
+                    android:id="@+id/item__discard"
+                    android:layout_width="384dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="112dp"
+                    android:text="資產報銷狀態:"
+                    android:textColor="#545454"
+
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item__name" />
+
+                <TextView
+                    android:id="@+id/item__rent"
+                    android:layout_width="384dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="88dp"
+                    android:text="資產租借/使用狀態:"
+                    android:textColor="#545454"
+
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item__name" />
+
+                <TextView
+                    android:id="@+id/item__person"
+                    android:layout_width="384dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="32dp"
+                    android:text="租借資產人員:"
+                    android:textColor="#545454"
+
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item__name" />
+
+                <TextView
+                    android:id="@+id/item__place"
+                    android:layout_width="384dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="56dp"
+                    android:text="資產租借地點:"
+                    android:textColor="#545454"
+                    android:textSize="15sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item__name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
