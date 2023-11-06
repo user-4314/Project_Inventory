@@ -1,27 +1,26 @@
 package com.example.mybmi;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,33 +28,42 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InitialActivity extends Activity implements NavigationView.OnNavigationItemSelectedListener {
     String Accountstr;
     String result;
-    String Place,Name;
-    ArrayList<String> hotelname;//存名字
-    ArrayList<String> hotelroom;//存標號
+    String Place,Name,Item;
+    ArrayList<String> itemName;//存名字
+    ArrayList<String> itemNumber;//存標號
+    ArrayList<String> unitName;
+    ArrayList<String> rent;
+    ArrayList<String> discard;
+    ArrayList<String> personName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
         initViews();
-        hotelname = new ArrayList<>();//初始化名稱陣列
-        hotelroom  = new ArrayList<>();//初始化標號陣列
+        itemName = new ArrayList<>();//初始化名稱陣列
+        itemNumber  = new ArrayList<>();//初始化標號陣列
+        unitName = new ArrayList<>();
+        personName = new ArrayList<>();
+        rent = new ArrayList<>();
+        discard = new ArrayList<>();
         Bundle bundle = this.getIntent().getExtras();
         Accountstr = bundle.getString("KEY_userinfo");
 
-
-        setListensoperate();
+        setListensName();
+        setListensPlace();
+        setListensItem();
 
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
@@ -70,47 +78,261 @@ public class InitialActivity extends Activity implements NavigationView.OnNaviga
 
         navigationView.setNavigationItemSelectedListener(this);
     }
-    private Button sure;
-    private ListView itemlistview;
-    private Button button_daccount;
-    private Button button_cborrow;
+    private Button button_item;
+    private ListView datalistview;
+    private ImageButton button_name;
+    private Button button_place;
     private Spinner str_place;
+    private Spinner str_item;
     private EditText str_name;
     private void initViews() {
-        sure = (Button) findViewById(R.id.sure);
-        itemlistview = (ListView) findViewById(R.id.itemlistview);
-        button_daccount = (Button) findViewById(R.id.deleteaccount);
-        button_cborrow = (Button) findViewById(R.id.checkborrow);
+        button_item = (Button) findViewById(R.id.sure_item);
+        datalistview = (ListView) findViewById(R.id.itemlistview);
+        button_name = (ImageButton) findViewById(R.id.sure_name);
+        button_place = (Button) findViewById(R.id.sure_place);
         str_name = (EditText) findViewById(R.id.search_name);
         str_place = (Spinner) findViewById(R.id.search_place);
+        str_item = (Spinner) findViewById(R.id.search_item);
     }
-    private void setListensoperate()
+    private void setListensName()
     {
-        button_daccount.setOnClickListener(gotodelacc);
-        button_cborrow.setOnClickListener(gotoborrow);
-        sure.setOnClickListener(showlistview);
+
+        button_name.setOnClickListener(gotoname);
+    }
+    private void setListensPlace()
+    {
+        button_place.setOnClickListener(gotoplace);
+
+    }
+    private void setListensItem()
+    {
+        button_item.setOnClickListener(gotoItem);
+
     }
 
-    private View.OnClickListener gotodelacc = new View.OnClickListener() {
+    private View.OnClickListener gotoname = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(InitialActivity.this,DeleteAccount .class);
-            Bundle bundle = new Bundle();
-            bundle.putString("KEY_userinfo", Accountstr);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            Name = str_name.getText().toString();
+            datalistview.setAdapter(null);
+            itemNumber.clear();
+            itemName.clear();
+            unitName.clear();
+            personName.clear();
+            discard.clear();
+            rent.clear();
+            if (Name.equals("")) {
+                Toast.makeText(InitialActivity.this, "請先輸入文字再做查詢", Toast.LENGTH_LONG).show();
+            }
+            else{
+                String url = "http://140.136.151.67/hsSqlSearch.php";
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response){
+                        result = response.trim();
+
+                        if (result.equals("no")) {
+                            Toast.makeText(InitialActivity.this, "查無資料", Toast.LENGTH_SHORT).show();
+                        } else {
+                            try {
+                                JSONArray array = new JSONArray(result);
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject jsonObject = array.getJSONObject(i);
+
+                                    String item_number = jsonObject.getString("item_number");
+                                    String item_name = jsonObject.getString("item_name");
+                                    String unit_name = jsonObject.getString("unit_name");
+                                    String person_name = jsonObject.getString("person_name");
+                                    String discard1 = jsonObject.getString(("discard"));
+                                    String rent1 = jsonObject.getString(("rent"));
+
+
+                                    itemNumber.add(item_number);
+                                    itemName.add(item_name);
+                                    unitName.add(unit_name);
+                                    personName.add(person_name);
+                                    discard.add(discard1);
+                                    rent.add(rent1);
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+
+                        datalistlayoutadapter adasports = new datalistlayoutadapter(InitialActivity.this);
+                        datalistview.setAdapter(adasports);
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(InitialActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+                    @Override
+                    protected  Map<String,String>getParams(){
+                        Map<String,String> params = new HashMap<String,String>();
+                        params.put("QRname",Name);//和php的參數做連結
+                        return params;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(InitialActivity.this);
+                requestQueue.add(stringRequest);
+
+            }
+
+        }
+
+    };
+    private View.OnClickListener gotoplace = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            datalistview.setAdapter(null);
+            itemNumber.clear();
+            itemName.clear();
+            unitName.clear();
+            personName.clear();
+            discard.clear();
+            rent.clear();
+            Place = str_place.getSelectedItem().toString();
+
+            String url = "http://140.136.151.67/hsSearchPlace.php";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response){
+                    result = response.trim();
+
+                    if (result.equals("no")) {
+                        Toast.makeText(InitialActivity.this, "查無資料", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONArray array = new JSONArray(result);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject jsonObject = array.getJSONObject(i);
+
+                                String item_number = jsonObject.getString("item_number");
+                                String item_name = jsonObject.getString("item_name");
+                                String unit_name = jsonObject.getString("unit_name");
+                                String person_name = jsonObject.getString("person_name");
+                                String discard1 = jsonObject.getString(("discard"));
+                                String rent1 = jsonObject.getString(("rent"));
+
+                                itemNumber.add(item_number);
+                                itemName.add(item_name);
+                                unitName.add(unit_name);
+                                personName.add(person_name);
+                                discard.add(discard1);
+                                rent.add(rent1);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                    datalistlayoutadapter adasports = new datalistlayoutadapter(InitialActivity.this);
+                    datalistview.setAdapter(adasports);
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(InitialActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                @Override
+                protected  Map<String,String>getParams(){
+                    Map<String,String> params = new HashMap<String,String>();
+                    params.put("QRplace", Place);//和php的參數做連結
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(InitialActivity.this);
+            requestQueue.add(stringRequest);
+
         }
     };
-    private View.OnClickListener gotoborrow = new View.OnClickListener() {
+    private View.OnClickListener gotoItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(InitialActivity.this,CheckBorrowActivity .class);
-            Bundle bundle = new Bundle();
-            bundle.putString("KEY_userinfo", Accountstr);
-            intent.putExtras(bundle);
-            startActivity(intent);
+
+            datalistview.setAdapter(null);
+            itemNumber.clear();
+            itemName.clear();
+            unitName.clear();
+            personName.clear();
+            discard.clear();
+            rent.clear();
+            Item = str_item.getSelectedItem().toString();
+
+            String url = "http://140.136.151.67/hsSearchItem.php";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response){
+                    result = response.trim();
+
+                    if (result.equals("no")) {
+                        Toast.makeText(InitialActivity.this, "查無資料", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONArray array = new JSONArray(result);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject jsonObject = array.getJSONObject(i);
+
+                                String item_number = jsonObject.getString("item_number");
+                                String item_name = jsonObject.getString("item_name");
+                                String unit_name = jsonObject.getString("unit_name");
+                                String person_name = jsonObject.getString("person_name");
+                                String discard1 = jsonObject.getString(("discard"));
+                                String rent1 = jsonObject.getString(("rent"));
+
+                                itemNumber.add(item_number);
+                                itemName.add(item_name);
+                                unitName.add(unit_name);
+                                personName.add(person_name);
+                                discard.add(discard1);
+                                rent.add(rent1);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+
+                    //check2.setText(rent.get(0));
+                    datalistlayoutadapter adasports = new datalistlayoutadapter(InitialActivity.this);
+                    datalistview.setAdapter(adasports);
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(InitialActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                @Override
+                protected  Map<String,String>getParams(){
+                    Map<String,String> params = new HashMap<String,String>();
+                    params.put("QRname", Item);//和php的參數做連結
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(InitialActivity.this);
+            requestQueue.add(stringRequest);
         }
     };
 
@@ -129,19 +351,20 @@ public class InitialActivity extends Activity implements NavigationView.OnNaviga
                 startActivity(intent);
                 break;
 
-            case R.id.menuBorrow:
-                intent.setClass(InitialActivity.this,InsertActivity .class);
+            case R.id.menuNFC:
+                intent.setClass(InitialActivity.this,NFCScanActivity .class);
                 bundle.putString("KEY_userinfo", Accountstr);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
-            case R.id.menuReturn:
-                intent.setClass(InitialActivity.this,DeleteActivity .class);
+            case R.id.menuQRcode:
+                intent.setClass(InitialActivity.this,QRcodeScanActivity .class);
                 bundle.putString("KEY_userinfo", Accountstr);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+
         }
         return true;
     }
@@ -151,125 +374,24 @@ public class InitialActivity extends Activity implements NavigationView.OnNaviga
         super.onPointerCaptureChanged(hasCapture);
     }
 
-
-
-    private View.OnClickListener showlistview = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Place = str_place.getSelectedItem().toString();
-            Name = str_name.getText().toString();
-
-            if (Name.equals("")) {
-                String url = "http://140.136.151.67/ChenReport.php";
-
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        result = response.trim();
-
-                        if (result.equals("no")) {
-                            Toast.makeText(InitialActivity.this, "沒有資料", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            try {
-                                JSONArray array = new JSONArray(result);
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject jsonObject = array.getJSONObject(i);
-
-                                    String strname = jsonObject.getString("item_name");//name是對應到資料庫裡name的column
-                                    //String strprice = jsonObject.getString("item_number");//price是對應到資料庫裡price的column
-                                    String strroom = jsonObject.getString("item_number");//room是對應到資料庫裡room的column
-                                    //String straddress = jsonObject.getString("address");
-                                    //String strphoto = jsonObject.getString("photo");
-                                    //新增要解析的參數名稱*****************************************
-                                    hotelname.add(strname);
-                                    //hotelprice.add(strprice);
-                                    hotelroom.add(strroom);
-                                    //hoteladdress.add(straddress);
-                                    //hotelphoto.add(strphoto);
-                                    //
-                                    //新增要解析的參數名稱*****************************************
-
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }
-                        }
-
-
-                        InitialActivity.listlayoutadapter adasports = new InitialActivity.listlayoutadapter(InitialActivity.this);
-
-                        itemlistview.setAdapter(adasports);////要把adapter的地方設定在activity_report.xml中的hotellistview 其中listVIew的大小要設定大一點否則可能會看不見
-
-
-                    }
-
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(InitialActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-
-
-                }) {
-
-                    protected Map<String, String> getParams() {
-
-                        Map<String, String> params = new HashMap<String, String>();
-
-                        //params.put("dataofAddress",county);
-
-                        //params.put("dataofHprice",strHprice);
-
-                        //params.put("dataofLprice",strLprice);
-
-                        //params.put("dataofPerson",person);
-
-                        //新增要解析的參數名稱******************************************
-
-                        return params;
-
-                    }
-
-                };
-
-
-                RequestQueue requestQueue = Volley.newRequestQueue(InitialActivity.this);
-                requestQueue.add(stringRequest);
-
-
-            }
-            else{
-
-            }
-        }
-
-
-    };
-
-    public class listlayoutadapter extends BaseAdapter {
+    public class datalistlayoutadapter extends BaseAdapter {
         //記得在設定樣板(hotelmessage的地方盡量把方塊以及顯示自行要拉大，否則很有可能是因為太小所以沒顯示出來)
         private LayoutInflater listlayoutInflater;
 
-        public listlayoutadapter(Context c){
+        public datalistlayoutadapter(Context c){
             listlayoutInflater = LayoutInflater.from(c);
         }
 
         @Override
         public int getCount() {
             //取得ArrayList的總數 (要注意，跟array不同之處)
-            return hotelname.size();
+            return itemName.size();
         }
 
         @Override
         public Object getItem(int position) {
             //要用get(position)取得資料 (要注意，跟array不同之處)
-            return  hotelname.get(position);
+            return  itemName.get(position);
         }
         @Override
         public long getItemId(int position) {
@@ -284,22 +406,34 @@ public class InitialActivity extends Activity implements NavigationView.OnNaviga
             convertView = listlayoutInflater.inflate(R.layout.itemmessage,null);//內容是要設定在hotelmessage中
 
             //設定自訂樣板上物件對應的資料。
-            //ImageView img_logo = (ImageView) convertView.findViewById(R.id.imglogo);
-            TextView hotel_name = (TextView) convertView.findViewById(R.id.item__name);
-            //TextView hotel_price = (TextView) convertView.findViewById(R.id.hotel__price);
-            //Button sure_button = (Button) convertView.findViewById(R.id.sure_button);//////新增的button
-            TextView hotel_room = (TextView) convertView.findViewById(R.id.item__code);
-            //TextView hotel_address = (TextView) convertView.findViewById(R.id.hotel__address);
-            //TextView hotel_photo = (TextView) convertView.findViewById(R.id.hotel__photo);
+            TextView item_name = (TextView) convertView.findViewById(R.id.item__name);
+            TextView item__number = (TextView) convertView.findViewById(R.id.item__code);
+            TextView item_place = (TextView) convertView.findViewById(R.id.item__place);
+            TextView item_person = (TextView) convertView.findViewById(R.id.item__person);
+            TextView item_rent = (TextView) convertView.findViewById(R.id.item__rent);
+            TextView item_discard = (TextView) convertView.findViewById(R.id.item__discard);
+
             //新增要解析的參數名稱************************************
 
             //要用get(position)取得資料 (要注意，跟array不同之處)
-            //img_logo.setImageResource(aryimas.get(position));
-            hotel_name.setText(hotelname.get(position));
-            //hotel_price.setText("NT$"+hotelprice.get(position));
-            hotel_room.setText(hotelroom.get(position));
-            //hotel_address.setText(hoteladdress.get(position));
-            //hotel_photo.setText(hotelphoto.get(position));
+            item__number.setText(itemName.get(position));
+            item_name.setText(itemNumber.get(position));
+
+            if(rent.get(position).equals("0")){
+                item_rent.append("未租借/未使用");
+                item_place.append("無");
+                item_person.append("無");
+            }else {
+                item_rent.append("租借中/使用過");
+                item_place.append(unitName.get(position));
+                item_person.append(personName.get(position));
+            }
+            if(discard.get(position).equals("0")){
+                item_discard.append("未報銷");
+            }else{
+                item_discard.append("已報銷");
+            }
+
 
             /*new  Thread(new Runnable() {
                 @Override
